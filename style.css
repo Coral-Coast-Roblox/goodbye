@@ -57,40 +57,4 @@ section {
     @include clearfix();
     margin: 12px 0;
   }
-  .separator {
-    color: white;
-    margin: 0 auto 1em;
-    width: 11em;
-  }
-  .line_separator {
-    svg {
-      width: 30px;
-      height: 20px;
-    }
-    &:before, &:after {
-      display: block;
-      width: 40%;
-      content: " ";
-      margin-top: 14px;
-      border: 1px solid white;
-    }
-    &:before {
-      float: left;
-    }
-    &:after {
-      float: right;
-    }
-  }
-  h3 {
-    font-family: $font-text;
-    letter-spacing: 2px;
-    line-height: 2;
-    font-size: em(16px);
-    font-weight: 400;
-    text-align: center;
-    margin: 0;
-    a {
-      text-decoration: underline;
-    }
-  }
-}
+ 
