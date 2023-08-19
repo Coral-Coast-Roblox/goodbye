@@ -2,7 +2,65 @@
 <html>
 <head>
   <title>Coral Coast Hotel</title>
-  <link href="assets/style.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .coming_content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      margin: 0 auto;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: em(90px);
+      margin: 0;
+      letter-spacing: 2px;
+      text-align: center;
+      color: white;
+    }
+
+    .separator_container {
+      width: 100%;
+      display: block;
+      text-align: center;
+      position: relative;
+      @include clearfix();
+      margin: 12px 0;
+    }
+
+    .separator {
+      color: white;
+      margin: 0 auto 1em;
+      width: 11em;
+    }
+
+    .line_separator {
+      svg {
+        width: 30px;
+        height: 20px;
+      }
+      &:before, &:after {
+        display: block;
+        width: 40%;
+        content: " ";
+        margin-top: 14px;
+        border: 1px solid white;
+      }
+      &:before {
+        float: left;
+      }
+      &:after {
+        float: right;
+      }
+    }
+  </style>
 </head>
 <body>
   <section>
@@ -13,5 +71,42 @@
     </div>
   </section>
 </body>
-<script src="assets/landing.js"></script>
+<script>
+var canvas = document.getElementById('beerCanvas');
+var ctx = canvas.getContext('2d');
+var particles = [];
+var particleCount = 280;
+
+for (var i = 0; i < particleCount; i++) {
+  particles.push(new particle());
+}
+
+function particle() {
+  this.x = Math.random() * canvas.width;
+  this.y = canvas.height + Math.random() * 300;
+  this.speed = 1 + Math.random();
+  this.radius = Math.random() * 3;
+  this.opacity = (Math.random() * 100) / 1000;
+}
+
+function loop() {
+  requestAnimationFrame(loop);
+  draw();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.globalCompositeOperation = 'lighter';
+  for (var i = 0; i < particles.length; i++) {
+    var p = particles[i];
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(255,255,255,' + p.opacity + ')';
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+    ctx.fill();
+    p.y -= p.speed;
+    if (p.y <= -10)
+      particles[i] = new particle();
+  }
+}
+loop();</script>
 </html>
